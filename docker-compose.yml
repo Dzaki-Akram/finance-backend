@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: .
+    container_name: finance-backend
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    ports:
+      - "8000:8000"          # Akses API di http://localhost:8000
+    volumes:
+      - .:/var/www/html      # Biar kalau kamu edit code di host, langsung ke container
+
+  mysql:
+    image: mysql:8.0
+    container_name: finance-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: finance_app
+      MYSQL_USER: finance_user
+      MYSQL_PASSWORD: secret_password
+    ports:
+      - "3307:3306"          # host:container → pakai 3307 di Windows, 3306 di dalam container
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
