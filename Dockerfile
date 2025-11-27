@@ -4,8 +4,14 @@ FROM php:8.2-cli
 # Set working directory
 WORKDIR /var/www/html
 
-# Install ekstensi yang dibutuhkan Laravel (pdo_mysql, dll)
-RUN docker-php-ext-install pdo pdo_mysql
+# Install tools & ekstensi yang dibutuhkan Laravel & Composer
+RUN apt-get update \
+    && apt-get install -y \
+        git \
+        unzip \
+        libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql zip \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- \

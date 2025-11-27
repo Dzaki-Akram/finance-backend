@@ -13,13 +13,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user',             [AuthController::class, 'me']);
     Route::post('/change-password', [AuthController::class, 'changePassword']);
 
-
     Route::put('/user/profile', [UserController::class, 'updateProfile']);
 
-
-    Route::get('/transactions',                    [TransactionController::class, 'index']);
-    Route::post('/transactions',                   [TransactionController::class, 'store']);
-    Route::get('/transactions/{transaction}',      [TransactionController::class, 'show']);
-    Route::put('/transactions/{transaction}',      [TransactionController::class, 'update']);
-    Route::delete('/transactions/{transaction}',   [TransactionController::class, 'destroy']);
+    Route::get('/transactions',                  [TransactionController::class, 'index']);
+    Route::post('/transactions',                 [TransactionController::class, 'store']);
+    Route::get('/transactions/{transaction}',    [TransactionController::class, 'show']);
+    Route::put('/transactions/{transaction}',    [TransactionController::class, 'update']);
+    Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy']);
 });
